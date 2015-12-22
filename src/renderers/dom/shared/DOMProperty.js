@@ -152,6 +152,17 @@ var defaultValueCache = {};
 
 var ATTRIBUTE_NAME_START_CHAR = ':A-Z_a-z\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD';
 
+// Adding unique react ids so that two instances of react will not collide on a browser.
+// @author tfeng@ixl.com 12/22/2015
+var getReactId = function getReactId() {
+  if (window.reactId) {
+    window.reactId++;
+  }
+  else {
+    window.reactId = 1;
+  }
+  return window.reactId;
+};
 /**
  * DOMProperty exports lookup objects that can be used like functions:
  *
@@ -167,7 +178,7 @@ var ATTRIBUTE_NAME_START_CHAR = ':A-Z_a-z\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\
  */
 var DOMProperty = {
 
-  ID_ATTRIBUTE_NAME: 'data-reactid',
+  ID_ATTRIBUTE_NAME: 'data-reactid' + getReactId(),
   ROOT_ATTRIBUTE_NAME: 'data-reactroot',
 
   ATTRIBUTE_NAME_START_CHAR: ATTRIBUTE_NAME_START_CHAR,
